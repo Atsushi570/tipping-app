@@ -3,7 +3,6 @@
     <div class="container my-m">
       <h2 class="header-text">ログイン画面</h2>
 
-      <formInput :data="formUserName"></formInput>
       <formInput :data="formEmail"></formInput>
       <formInput :data="formPassword"></formInput>
 
