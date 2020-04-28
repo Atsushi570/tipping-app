@@ -6,11 +6,11 @@
 
 <style scoped>
 .logo-wrapper {
-  margin: 5vw 0;
+  margin: 3vw 0;
   text-align: center;
 }
 img {
-  width: 300px;
+  width: 250px;
   height: auto;
 }
 </style>
