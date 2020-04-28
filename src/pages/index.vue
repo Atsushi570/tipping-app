@@ -1,17 +1,9 @@
 <template>
   <div>
     <div>
-      <logo />
+      <h2>新規登録</h2>
     </div>
   </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
-
-export default {
-  components: {
-    Logo
-  }
-}
-</script>
+<script></script>
