@@ -24,11 +24,6 @@ export default {
   components: { formInput },
   data() {
     return {
-      formUserName: {
-        label: 'ユーザ名',
-        type: 'text',
-        placeHolder: 'Your Name'
-      },
       formEmail: {
         label: 'メールアドレス',
         type: 'Email',
