@@ -1,19 +1,18 @@
 <template>
   <div>
     <div class="container my-m">
-      <h2 class="header-text">ログイン画面</h2>
+      <h2 class="header-text">新規登録</h2>
 
+      <formInput :data="formUserName"></formInput>
       <formInput :data="formEmail"></formInput>
       <formInput :data="formPassword"></formInput>
 
       <div class="has-text-centered mt-s">
-        <button class="button is-info is-outlined">ログイン</button>
+        <button class="button is-info is-outlined">新規登録</button>
       </div>
 
       <div class="has-text-centered">
-        <nuxt-link to="/register" class="has-text-info register-link">
-          新規登録はこちら
-        </nuxt-link>
+        <a class="has-text-info register-link" href="">ログインはこちら</a>
       </div>
     </div>
   </div>
@@ -26,6 +25,11 @@ export default {
   components: { formInput },
   data() {
     return {
+      formUserName: {
+        label: 'ユーザ名',
+        type: 'text',
+        placeHolder: 'Your Name'
+      },
       formEmail: {
         label: 'メールアドレス',
         type: 'Email',
