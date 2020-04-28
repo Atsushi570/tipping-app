@@ -12,7 +12,9 @@
       </div>
 
       <div class="has-text-centered">
-        <a class="has-text-info register-link" href="">ログインはこちら</a>
+        <nuxt-link to="/" class="has-text-info login-link">
+          ログインはこちら
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -46,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.register-link {
+.login-link {
   font-size: 14px;
 }
 </style>
