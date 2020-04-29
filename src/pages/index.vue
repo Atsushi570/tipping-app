@@ -3,11 +3,16 @@
     <div class="container my-m">
       <h2 class="header-text">ログイン画面</h2>
 
-      <formInput :data="formEmail"></formInput>
-      <formInput :data="formPassword"></formInput>
+      <formInput v-model="formEmail.input" :content="formEmail"></formInput>
+      <formInput
+        v-model="formPassword.input"
+        :content="formPassword"
+      ></formInput>
 
       <div class="has-text-centered mt-s">
-        <button class="button is-info is-outlined">ログイン</button>
+        <button class="button is-info is-outlined" @click="logIn">
+          ログイン
+        </button>
       </div>
 
       <div class="has-text-centered">
@@ -32,13 +37,27 @@ export default {
       formEmail: {
         label: 'メールアドレス',
         type: 'Email',
-        placeHolder: 'your.email@example.com'
+        placeHolder: 'your.email@example.com',
+        input: ''
       },
       formPassword: {
         label: 'パスワード',
         type: 'password',
-        placeHolder: 'Passwrod'
+        placeHolder: 'Passwrod',
+        input: ''
       }
+    }
+  },
+  methods: {
+    logIn() {
+      this.$axios.$post(
+        '/accounts:signInWithPassword?key=' + process.env.API_KEY,
+        {
+          email: this.formEmail.input,
+          password: this.formPassword.input,
+          returnSecureToken: true
+        }
+      )
     }
   }
 }
