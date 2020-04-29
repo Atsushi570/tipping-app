@@ -24,6 +24,9 @@ import formInput from '~/components/formInput.vue'
 
 export default {
   components: { formInput },
+  model: {
+    event: 'input'
+  },
   data() {
     return {
       formEmail: {

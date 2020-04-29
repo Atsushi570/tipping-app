@@ -2,12 +2,14 @@
   <div class="form-wrapper">
     <div class="columns is-desktop">
       <div class="field column is-6 is-offset-3">
-        <label class="label">{{ data.label }}</label>
+        <label class="label">{{ content.label }}</label>
         <p class="control">
           <input
             class="input"
-            :type="data.type"
-            :placeholder="data.placeHolder"
+            :type="content.type"
+            :placeholder="content.placeHolder"
+            :value="input"
+            @input="$emit('input', $event.target.value)"
           />
         </p>
       </div>
@@ -18,9 +20,14 @@
 <script>
 export default {
   props: {
-    data: {
+    content: {
       required: true,
       type: Object
+    }
+  },
+  data() {
+    return {
+      input: ''
     }
   }
 }
