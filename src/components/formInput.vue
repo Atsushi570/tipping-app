@@ -28,8 +28,9 @@ export default {
       type: Object
     },
     errorMessage: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      default: ''
     }
   },
   data() {
