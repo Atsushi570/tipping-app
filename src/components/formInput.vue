@@ -2,13 +2,16 @@
   <div class="form-wrapper">
     <div class="columns is-desktop">
       <div class="field column is-6 is-offset-3">
-        <label class="label">{{ content.label }}</label>
+        <label class="label">
+          {{ content.label }}
+          <span>{{ errorMessage }}</span>
+        </label>
         <p class="control">
           <input
+            v-model="input"
             class="input"
             :type="content.type"
             :placeholder="content.placeHolder"
-            :value="input"
             @input="$emit('input', $event.target.value)"
           />
         </p>
@@ -23,6 +26,10 @@ export default {
     content: {
       required: true,
       type: Object
+    },
+    errorMessage: {
+      required: true,
+      type: String
     }
   },
   data() {
@@ -34,6 +41,12 @@ export default {
 </script>
 
 <style scoped>
+.label span {
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: normal;
+  color: red;
+}
 .field {
   padding-right: 4vw;
   padding-left: 4vw;
