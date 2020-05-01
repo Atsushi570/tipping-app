@@ -15,7 +15,7 @@
       ></formInput>
 
       <div class="has-text-centered mt-s">
-        <button class="button is-info is-outlined" @click="logIn">
+        <button class="button is-info is-outlined" @click="login">
           ログイン
         </button>
       </div>
@@ -57,16 +57,12 @@ export default {
   },
   methods: {
     // 全ての入力値に不正がない場合はログインpostをサーバに送信する
-    logIn() {
+    login() {
       if (this.updateErrorMessage()) {
-        this.$axios.$post(
-          '/accounts:signInWithPassword?key=' + process.env.API_KEY,
-          {
-            email: this.formEmail.input,
-            password: this.formPassword.input,
-            returnSecureToken: true
-          }
-        )
+        this.$store.dispatch('auth/login', {
+          email: this.formEmail.input,
+          password: this.formPassword.input
+        })
       }
     },
 
