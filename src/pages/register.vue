@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container my-m">
-      <h2 class="header-text">新規登録</h2>
+      <h2 class="header-text my-s">新規登録</h2>
 
       <formInput
         v-model="formUserName.input"
@@ -29,7 +29,7 @@
         </button>
       </div>
 
-      <div class="has-text-centered">
+      <div class="has-text-centered mb-l">
         <nuxt-link to="/" class="has-text-info login-link">
           ログインはこちら
         </nuxt-link>

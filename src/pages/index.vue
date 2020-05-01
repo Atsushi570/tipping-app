@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container my-m">
-      <h2 class="header-text">ログイン画面</h2>
+      <h2 class="header-text my-s">ログイン画面</h2>
 
       <formInput
         v-model="formEmail.input"
@@ -20,7 +20,7 @@
         </button>
       </div>
 
-      <div class="has-text-centered">
+      <div class="has-text-centered mb-l">
         <nuxt-link to="/register" class="has-text-info register-link">
           新規登録はこちら
         </nuxt-link>
