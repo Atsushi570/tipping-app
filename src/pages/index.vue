@@ -3,10 +3,15 @@
     <div class="container my-m">
       <h2 class="header-text">ログイン画面</h2>
 
-      <formInput v-model="formEmail.input" :content="formEmail"></formInput>
+      <formInput
+        v-model="formEmail.input"
+        :content="formEmail"
+        :error-message="formEmail.errorMessage"
+      ></formInput>
       <formInput
         v-model="formPassword.input"
         :content="formPassword"
+        :error-message="formPassword.errorMessage"
       ></formInput>
 
       <div class="has-text-centered mt-s">
@@ -38,26 +43,45 @@ export default {
         label: 'メールアドレス',
         type: 'Email',
         placeHolder: 'your.email@example.com',
-        input: ''
+        input: '',
+        errorMessage: ''
       },
       formPassword: {
         label: 'パスワード',
         type: 'password',
         placeHolder: 'Passwrod',
-        input: ''
+        input: '',
+        errorMessage: ''
       }
     }
   },
   methods: {
+    // 全ての入力値に不正がない場合はログインpostをサーバに送信する
     logIn() {
-      this.$axios.$post(
-        '/accounts:signInWithPassword?key=' + process.env.API_KEY,
-        {
-          email: this.formEmail.input,
-          password: this.formPassword.input,
-          returnSecureToken: true
-        }
-      )
+      if (this.updateErrorMessage()) {
+        this.$axios.$post(
+          '/accounts:signInWithPassword?key=' + process.env.API_KEY,
+          {
+            email: this.formEmail.input,
+            password: this.formPassword.input,
+            returnSecureToken: true
+          }
+        )
+      }
+    },
+
+    // 各入力値が不正である場合にerrorMessageにエラー文を格納する
+    // 全ての入力値に不正がない場合はtrueを返す
+    updateErrorMessage() {
+      const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      this.formEmail.errorMessage = regexEmail.test(this.formEmail.input)
+        ? ''
+        : '有効なEmailアドレスを入力してください'
+
+      this.formPassword.errorMessage =
+        this.formPassword.input.length > 5 ? '' : '6文字以上入力してください'
+
+      return !this.formEmail.errorMessage && !this.formPassword.errorMessage
     }
   }
 }
