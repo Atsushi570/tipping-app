@@ -9,15 +9,22 @@ export const mutations = {
 }
 
 export const actions = {
-  login({ commit }, authDate) {
-    this.$axios
-      .$post('/accounts:signInWithPassword?key=' + process.env.API_KEY, {
-        email: authDate.email,
-        password: authDate.password,
-        returnSecureToken: true
-      })
-      .then((response) => {
-        commit('updateIdToken', response.idToken)
-      })
+  // ログインが成功した場合にidTokenをstoreに格納し、trueを返す
+  // ログイン失敗時はfalseを返す
+  async getToken({ commit }, authData) {
+    try {
+      const response = await this.$axios.$post(
+        '/accounts:signInWithPassword?key=' + process.env.API_KEY,
+        {
+          email: authData.email,
+          password: authData.password,
+          returnSecureToken: true
+        }
+      )
+      commit('updateIdToken', response.idToken)
+      return true
+    } catch (error) {
+      return false
+    }
   }
 }

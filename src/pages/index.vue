@@ -20,10 +20,15 @@
         </button>
       </div>
 
-      <div class="has-text-centered mb-l">
+      <div class="has-text-centered">
         <nuxt-link to="/register" class="has-text-info register-link">
           新規登録はこちら
         </nuxt-link>
+      </div>
+      <div class="login-fail mb-l">
+        <p v-if="isLoginFailed" class="has-text-danger">
+          入力内容をご確認ください
+        </p>
       </div>
     </div>
   </div>
@@ -52,17 +57,20 @@ export default {
         placeHolder: 'Passwrod',
         input: '',
         errorMessage: ''
-      }
+      },
+      isLoginFailed: false
     }
   },
   methods: {
     // 全ての入力値に不正がない場合はログインpostをサーバに送信する
-    login() {
+    // ログインが失敗したらisLoginFailedをfalseにする
+    async login() {
       if (this.updateErrorMessage()) {
-        this.$store.dispatch('auth/login', {
+        const isLoginSuccessed = await this.$store.dispatch('auth/getToken', {
           email: this.formEmail.input,
           password: this.formPassword.input
         })
+        this.isLoginFailed = !isLoginSuccessed
       }
     },
 
@@ -86,5 +94,14 @@ export default {
 <style scoped>
 .register-link {
   font-size: 14px;
+}
+.login-fail {
+  position: relative;
+}
+.login-fail p {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
