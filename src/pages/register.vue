@@ -29,10 +29,15 @@
         </button>
       </div>
 
-      <div class="has-text-centered mb-l">
+      <div class="has-text-centered">
         <nuxt-link to="/" class="has-text-info login-link">
           ログインはこちら
         </nuxt-link>
+      </div>
+      <div class="register-fail mb-l">
+        <p v-if="isRegisterFailed" class="has-text-danger">
+          登録に失敗しました。入力内容をご確認ください。
+        </p>
       </div>
     </div>
   </div>
@@ -62,7 +67,8 @@ export default {
         type: 'password',
         placeHolder: 'Passwrod',
         input: ''
-      }
+      },
+      isRegisterFailed: false
     }
   },
   computed: {
@@ -93,20 +99,26 @@ export default {
     }
   },
   methods: {
-    register() {
-      this.$axios
-        .$post('/accounts:signUp?key=' + process.env.API_KEY, {
-          email: this.formEmail.input,
-          password: this.formPassword.input,
+    async register() {
+      try {
+        const response = await this.$axios.$post(
+          '/accounts:signUp?key=' + process.env.API_KEY,
+          {
+            email: this.formEmail.input,
+            password: this.formPassword.input,
+            returnSecureToken: true
+          }
+        )
+
+        this.$axios.$post('accounts:update?key=' + process.env.API_KEY, {
+          idToken: response.idToken,
+          displayName: this.formUserName.input,
           returnSecureToken: true
         })
-        .then((response) => {
-          this.$axios.$post('accounts:update?key=' + process.env.API_KEY, {
-            idToken: response.idToken,
-            displayName: this.formUserName.input,
-            returnSecureToken: true
-          })
-        })
+        this.isRegisterFailed = false
+      } catch (error) {
+        this.isRegisterFailed = true
+      }
     }
   }
 }
@@ -115,5 +127,14 @@ export default {
 <style scoped>
 .login-link {
   font-size: 14px;
+}
+.register-fail {
+  position: relative;
+}
+.register-fail p {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
