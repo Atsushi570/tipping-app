@@ -53,9 +53,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {
-    baseURL: 'https://identitytoolkit.googleapis.com/v1'
-  },
+  axios: {},
   /*
    ** Build configuration
    */

@@ -1,3 +1,5 @@
+import axiosAuth from '~/plugins/axiosAuth.js'
+
 export const state = () => ({
   idToken: null
 })
@@ -9,22 +11,26 @@ export const mutations = {
 }
 
 export const actions = {
-  // ログインが成功した場合にidTokenをstoreに格納し、trueを返す
-  // ログイン失敗時はfalseを返す
-  async getToken({ commit }, authData) {
+  // アカウントの新規登録が成功した場合にユーザ名の登録をする
+  // すべて成功した場合にidTokenをstoreに格納する
+  async register({ commit }, authData) {
     try {
-      const response = await this.$axios.$post(
-        '/accounts:signInWithPassword?key=' + process.env.API_KEY,
+      const response = await axiosAuth.post(
+        '/accounts:signUp?key=' + process.env.API_KEY,
         {
           email: authData.email,
           password: authData.password,
           returnSecureToken: true
         }
       )
-      commit('updateIdToken', response.idToken)
-      return true
+      await axiosAuth.post('accounts:update?key=' + process.env.API_KEY, {
+        idToken: response.data.idToken,
+        displayName: authData.userName,
+        returnSecureToken: true
+      })
+      commit('updateIdToken', response.data.idToken)
     } catch (error) {
-      return false
+      // 今はに握りつぶしてるが別ブランチで例外処理追加済みなのでこのブランチでは実装しない
     }
   }
 }

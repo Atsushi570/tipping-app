@@ -99,26 +99,12 @@ export default {
     }
   },
   methods: {
-    async register() {
-      try {
-        const response = await this.$axios.$post(
-          '/accounts:signUp?key=' + process.env.API_KEY,
-          {
-            email: this.formEmail.input,
-            password: this.formPassword.input,
-            returnSecureToken: true
-          }
-        )
-
-        this.$axios.$post('accounts:update?key=' + process.env.API_KEY, {
-          idToken: response.idToken,
-          displayName: this.formUserName.input,
-          returnSecureToken: true
-        })
-        this.isRegisterFailed = false
-      } catch (error) {
-        this.isRegisterFailed = true
-      }
+    register() {
+      this.$store.dispatch('auth/register', {
+        userName: this.formUserName.input,
+        email: this.formEmail.input,
+        password: this.formPassword.input
+      })
     }
   }
 }
