@@ -66,7 +66,7 @@ export default {
     // ログインが失敗したらisLoginFailedをfalseにする
     async login() {
       if (this.updateErrorMessage()) {
-        const isLoginSuccessed = await this.$store.dispatch('auth/getToken', {
+        const isLoginSuccessed = await this.$store.dispatch('auth/login', {
           email: this.formEmail.input,
           password: this.formPassword.input
         })

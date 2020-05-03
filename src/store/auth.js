@@ -32,5 +32,24 @@ export const actions = {
     } catch (error) {
       // 今はに握りつぶしてるが別ブランチで例外処理追加済みなのでこのブランチでは実装しない
     }
+  },
+
+  // ログインが成功した場合にidTokenをstoreに格納し、trueを返す
+  // ログイン失敗時はfalseを返す
+  async login({ commit }, authData) {
+    try {
+      const response = await axiosAuth.post(
+        '/accounts:signInWithPassword?key=' + process.env.API_KEY,
+        {
+          email: authData.email,
+          password: authData.password,
+          returnSecureToken: true
+        }
+      )
+      commit('updateIdToken', response.data.idToken)
+      return true
+    } catch (error) {
+      return false
+    }
   }
 }
