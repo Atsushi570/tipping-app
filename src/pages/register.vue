@@ -99,12 +99,15 @@ export default {
     }
   },
   methods: {
-    register() {
-      this.$store.dispatch('auth/register', {
+    // アカウント情報をpostして登録をする
+    // 登録が失敗したらisRegisterFailedをtrueにする
+    async register() {
+      const isRegisterSuccessed = await this.$store.dispatch('auth/register', {
         userName: this.formUserName.input,
         email: this.formEmail.input,
         password: this.formPassword.input
       })
+      this.isRegisterFailed = !isRegisterSuccessed
     }
   }
 }

@@ -29,8 +29,9 @@ export const actions = {
         returnSecureToken: true
       })
       commit('updateIdToken', response.data.idToken)
+      return true
     } catch (error) {
-      // 今はに握りつぶしてるが別ブランチで例外処理追加済みなのでこのブランチでは実装しない
+      return false
     }
   },
 
