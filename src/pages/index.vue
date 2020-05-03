@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     // 全ての入力値に不正がない場合はログインpostをサーバに送信する
-    // ログインが失敗したらisLoginFailedをfalseにする
+    // ログインが失敗したらisLoginFailedをtrueにする
     async login() {
       if (this.updateErrorMessage()) {
         const isLoginSuccessed = await this.$store.dispatch('auth/login', {
