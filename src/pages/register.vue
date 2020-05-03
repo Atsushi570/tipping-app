@@ -30,6 +30,7 @@
 
 <script>
 import formInput from '~/components/formInput.vue'
+import axiosAuth from '~/plugins/axiosAuth.js'
 
 export default {
   components: { formInput },
@@ -57,14 +58,14 @@ export default {
   },
   methods: {
     register() {
-      this.$axios
-        .$post('/accounts:signUp?key=' + process.env.API_KEY, {
+      axiosAuth
+        .post('/accounts:signUp?key=' + process.env.API_KEY, {
           email: this.formEmail.input,
           password: this.formPassword.input,
           returnSecureToken: true
         })
         .then((response) => {
-          this.$axios.$post('accounts:update?key=' + process.env.API_KEY, {
+          axiosAuth.post('accounts:update?key=' + process.env.API_KEY, {
             idToken: response.idToken,
             displayName: this.formUserName.input,
             returnSecureToken: true
