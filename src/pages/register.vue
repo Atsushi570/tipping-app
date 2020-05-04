@@ -100,6 +100,7 @@ export default {
   },
   methods: {
     // アカウント情報をpostして登録をする
+    // 登録が成功したらdashboardページに遷移する
     // 登録が失敗したらisRegisterFailedをtrueにする
     async register() {
       const isRegisterSuccessed = await this.$store.dispatch('auth/register', {
@@ -107,7 +108,11 @@ export default {
         email: this.formEmail.input,
         password: this.formPassword.input
       })
-      this.isRegisterFailed = !isRegisterSuccessed
+      if (isRegisterSuccessed) {
+        this.$router.push('dashboard')
+      } else {
+        this.isRegisterFailed = !isRegisterSuccessed
+      }
     }
   }
 }

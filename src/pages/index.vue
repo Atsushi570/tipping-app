@@ -63,6 +63,7 @@ export default {
   },
   methods: {
     // 全ての入力値に不正がない場合はログインpostをサーバに送信する
+    // ログインが成功したらdashboardページに遷移する
     // ログインが失敗したらisLoginFailedをtrueにする
     async login() {
       if (this.updateErrorMessage()) {
@@ -70,7 +71,11 @@ export default {
           email: this.formEmail.input,
           password: this.formPassword.input
         })
-        this.isLoginFailed = !isLoginSuccessed
+        if (isLoginSuccessed) {
+          this.$router.push('dashboard')
+        } else {
+          this.isLoginFailed = !isLoginSuccessed
+        }
       }
     },
 
