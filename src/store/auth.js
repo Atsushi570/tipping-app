@@ -1,18 +1,22 @@
 import axiosAuth from '~/plugins/axiosAuth.js'
 
 export const state = () => ({
-  idToken: null
+  idToken: null,
+  displayName: null
 })
 
 export const mutations = {
   updateIdToken(state, idToken) {
     state.idToken = idToken
+  },
+  updateDisplayName(state, displayName) {
+    state.displayName = displayName
   }
 }
 
 export const actions = {
   // アカウントの新規登録が成功した場合にユーザ名の登録をする
-  // すべて成功した場合にidTokenをstoreに格納する
+  // すべて成功した場合にidTokenとuserNameをstoreに格納する
   async register({ commit }, authData) {
     try {
       const response = await axiosAuth.post(
@@ -29,6 +33,7 @@ export const actions = {
         returnSecureToken: true
       })
       commit('updateIdToken', response.data.idToken)
+      commit('updateDisplayName', authData.userName)
       return true
     } catch (error) {
       return false
