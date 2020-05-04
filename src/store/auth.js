@@ -53,6 +53,7 @@ export const actions = {
         }
       )
       commit('updateIdToken', response.data.idToken)
+      commit('updateDisplayName', response.data.displayName)
       return true
     } catch (error) {
       return false
