@@ -1,17 +1,51 @@
 <template>
   <div>
-    <div>
-      <logo />
+    <div class="container my-m">
+      <h2 class="header-text">ログイン画面</h2>
+
+      <formInput :data="formEmail"></formInput>
+      <formInput :data="formPassword"></formInput>
+
+      <div class="has-text-centered mt-s">
+        <button class="button is-info is-outlined">ログイン</button>
+      </div>
+
+      <div class="has-text-centered">
+        <nuxt-link to="/register" class="has-text-info register-link">
+          新規登録はこちら
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import formInput from '~/components/formInput.vue'
 
 export default {
-  components: {
-    Logo
+  components: { formInput },
+  model: {
+    event: 'input'
+  },
+  data() {
+    return {
+      formEmail: {
+        label: 'メールアドレス',
+        type: 'Email',
+        placeHolder: 'your.email@example.com'
+      },
+      formPassword: {
+        label: 'パスワード',
+        type: 'password',
+        placeHolder: 'Passwrod'
+      }
+    }
   }
 }
 </script>
+
+<style scoped>
+.register-link {
+  font-size: 14px;
+}
+</style>

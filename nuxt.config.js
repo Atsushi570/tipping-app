@@ -1,3 +1,6 @@
+require('dotenv').config()
+const { API_KEY } = process.env
+
 export default {
   srcDir: 'src/',
   mode: 'spa',
@@ -24,7 +27,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['ress'],
+  css: ['ress', '~/assets/css/global.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -34,7 +37,8 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
@@ -65,5 +69,8 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    API_KEY
   }
 }
