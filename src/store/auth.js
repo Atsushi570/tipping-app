@@ -1,4 +1,5 @@
 import axiosAuth from '~/plugins/axiosAuth.js'
+import axiosAuthRefresh from '~/plugins/axiosAuthRefresh.js'
 
 export const state = () => ({
   idToken: null,
@@ -42,7 +43,8 @@ export const actions = {
 
   // ログインが成功した場合にidTokenをstoreに格納し、trueを返す
   // ログイン失敗時はfalseを返す
-  async login({ commit }, authData) {
+  // ログイン失敗時はresponse内のrefreshTokenとexpiresInを元に定期的にtokenをリフレッシュする
+  async login({ commit, dispatch }, authData) {
     try {
       const response = await axiosAuth.post(
         '/accounts:signInWithPassword?key=' + process.env.API_KEY,
@@ -54,9 +56,31 @@ export const actions = {
       )
       commit('updateIdToken', response.data.idToken)
       commit('updateDisplayName', response.data.displayName)
+
+      setTimeout(() => {
+        dispatch('refreshToken', response.data.refreshToken)
+      }, response.data.expiresIn * 1000)
       return true
     } catch (error) {
       return false
     }
+  },
+
+  // 引数で受け取ったrefreshTokenを使ってidTokenをrefreshする
+  refreshToken({ commit, dispatch }, refreshToken) {
+    try {
+      axiosAuthRefresh
+        .post('/token?key=' + process.env.API_KEY, {
+          grant_type: 'refresh_token',
+          refresh_token: refreshToken
+        })
+        .then((response) => {
+          commit('updateIdToken', response.data.id_token)
+
+          setTimeout(() => {
+            dispatch('refreshToken', response.data.refresh_token)
+          }, response.data.expires_in * 1000)
+        })
+    } catch (error) {}
   }
 }

@@ -65,15 +65,19 @@ export default {
     // 全ての入力値に不正がない場合はログインpostをサーバに送信する
     // ログインが成功したらdashboardページに遷移する
     // ログインが失敗したらisLoginFailedをtrueにする
-    async login() {
+    login() {
       if (this.updateErrorMessage()) {
-        this.isLoginFailed = await !this.$store.dispatch('auth/login', {
-          email: this.formEmail.input,
-          password: this.formPassword.input
-        })
-        if (!this.isLoginFailed) {
-          this.$router.push('dashboard')
-        }
+        this.$store
+          .dispatch('auth/login', {
+            email: this.formEmail.input,
+            password: this.formPassword.input
+          })
+          .then((result) => {
+            this.isLoginFailed = !result
+            if (result) {
+              this.$router.push('dashboard')
+            }
+          })
       }
     },
 
