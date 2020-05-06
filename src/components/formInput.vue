@@ -4,7 +4,7 @@
       <div class="field column is-6 is-offset-3">
         <label class="label">
           {{ label }}
-          <span>{{ errorMessage }}</span>
+          <span class="has-text-danger">{{ errorMessage }}</span>
         </label>
         <p class="control">
           <input
@@ -58,7 +58,6 @@ export default {
   margin-left: 10px;
   font-size: 12px;
   font-weight: normal;
-  color: red;
 }
 .field {
   padding-right: 4vw;
