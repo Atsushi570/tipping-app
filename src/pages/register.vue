@@ -102,17 +102,19 @@ export default {
     // アカウント情報をpostして登録をする
     // 登録が成功したらdashboardページに遷移する
     // 登録が失敗したらisRegisterFailedをtrueにする
-    async register() {
-      const isRegisterSuccessed = await this.$store.dispatch('auth/register', {
-        userName: this.formUserName.input,
-        email: this.formEmail.input,
-        password: this.formPassword.input
-      })
-      if (isRegisterSuccessed) {
-        this.$router.push('dashboard')
-      } else {
-        this.isRegisterFailed = !isRegisterSuccessed
-      }
+    register() {
+      this.$store
+        .dispatch('auth/register', {
+          userName: this.formUserName.input,
+          email: this.formEmail.input,
+          password: this.formPassword.input
+        })
+        .then((result) => {
+          this.isRegisterFailed = !result
+          if (result) {
+            this.$router.push('dashboard')
+          }
+        })
     }
   }
 }

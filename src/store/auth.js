@@ -18,7 +18,7 @@ export const mutations = {
 export const actions = {
   // アカウントの新規登録が成功した場合にユーザ名の登録をする
   // すべて成功した場合にidTokenとuserNameをstoreに格納する
-  async register({ commit }, authData) {
+  async register({ commit, dispatch }, authData) {
     try {
       const response = await axiosAuth.post(
         '/accounts:signUp?key=' + process.env.API_KEY,
@@ -35,6 +35,11 @@ export const actions = {
       })
       commit('updateIdToken', response.data.idToken)
       commit('updateDisplayName', authData.userName)
+
+      setTimeout(() => {
+        dispatch('refreshToken', response.data.refreshToken)
+      }, response.data.expiresIn * 1000)
+
       return true
     } catch (error) {
       return false
