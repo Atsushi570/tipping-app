@@ -3,15 +3,15 @@
     <div class="columns is-desktop">
       <div class="field column is-6 is-offset-3">
         <label class="label">
-          {{ content.label }}
+          {{ label }}
           <span>{{ errorMessage }}</span>
         </label>
         <p class="control">
           <input
             v-model="input"
             class="input"
-            :type="content.type"
-            :placeholder="content.placeHolder"
+            :type="type"
+            :placeholder="placeHolder"
             @input="$emit('input', $event.target.value)"
           />
         </p>
@@ -31,6 +31,18 @@ export default {
       required: false,
       type: String,
       default: ''
+    },
+    label: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    placeHolder: {
+      type: String,
+      required: true
     }
   },
   data() {

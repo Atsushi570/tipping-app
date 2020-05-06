@@ -5,11 +5,17 @@
 
       <formInput
         v-model="formEmail.input"
+        label="メールアドレス"
+        type="Email"
+        place-holder="your.email@example.com"
         :content="formEmail"
         :error-message="formEmail.errorMessage"
       ></formInput>
       <formInput
         v-model="formPassword.input"
+        label="パスワード"
+        type="password"
+        place-holder="Password"
         :content="formPassword"
         :error-message="formPassword.errorMessage"
       ></formInput>
@@ -45,16 +51,10 @@ export default {
   data() {
     return {
       formEmail: {
-        label: 'メールアドレス',
-        type: 'Email',
-        placeHolder: 'your.email@example.com',
         input: '',
         errorMessage: ''
       },
       formPassword: {
-        label: 'パスワード',
-        type: 'password',
-        placeHolder: 'Passwrod',
         input: '',
         errorMessage: ''
       },
@@ -67,14 +67,12 @@ export default {
     // ログインが失敗したらisLoginFailedをtrueにする
     async login() {
       if (this.updateErrorMessage()) {
-        const isLoginSuccessed = await this.$store.dispatch('auth/login', {
+        this.isLoginFailed = await !this.$store.dispatch('auth/login', {
           email: this.formEmail.input,
           password: this.formPassword.input
         })
-        if (isLoginSuccessed) {
+        if (!this.isLoginFailed) {
           this.$router.push('dashboard')
-        } else {
-          this.isLoginFailed = !isLoginSuccessed
         }
       }
     },

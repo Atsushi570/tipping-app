@@ -5,18 +5,27 @@
 
       <formInput
         v-model="formUserName.input"
+        label="ユーザ名"
+        type="text"
+        place-holder="Your Name"
         :content="formUserName"
         :error-message="validateUserName"
       ></formInput>
       <formInput
         v-model="formEmail.input"
-        :error-message="validateEmail"
+        label="メールアドレス"
+        type="Email"
+        place-holder="your.email@example.com"
         :content="formEmail"
+        :error-message="validateEmail"
       ></formInput>
       <formInput
         v-model="formPassword.input"
-        :error-message="validatePassword"
+        label="パスワード"
+        type="password"
+        place-holder="Password"
         :content="formPassword"
+        :error-message="validatePassword"
       ></formInput>
 
       <div class="has-text-centered mt-s">
@@ -51,21 +60,12 @@ export default {
   data() {
     return {
       formUserName: {
-        label: 'ユーザ名',
-        type: 'text',
-        placeHolder: 'Your Name',
         input: ''
       },
       formEmail: {
-        label: 'メールアドレス',
-        type: 'Email',
-        placeHolder: 'your.email@example.com',
         input: ''
       },
       formPassword: {
-        label: 'パスワード',
-        type: 'password',
-        placeHolder: 'Passwrod',
         input: ''
       },
       isRegisterFailed: false
