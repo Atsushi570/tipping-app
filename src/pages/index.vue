@@ -74,9 +74,7 @@ export default {
           })
           .then((result) => {
             this.isLoginFailed = !result
-            if (result) {
-              this.$router.push('dashboard')
-            }
+            if (result) this.$router.push('dashboard')
           })
       }
     },

@@ -111,9 +111,7 @@ export default {
         })
         .then((result) => {
           this.isRegisterFailed = !result
-          if (result) {
-            this.$router.push('dashboard')
-          }
+          if (result) this.$router.push('dashboard')
         })
     }
   }
