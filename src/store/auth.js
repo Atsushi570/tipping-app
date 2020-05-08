@@ -3,15 +3,23 @@ import axiosAuthRefresh from '~/plugins/axiosAuthRefresh.js'
 
 export const state = () => ({
   idToken: null,
+  refreshToken: null,
   displayName: null
 })
 
 export const mutations = {
   updateIdToken(state, idToken) {
     state.idToken = idToken
+    localStorage.setItem('idToken', idToken)
+  },
+  updateRefreshToken(state, { refreshToken, expiresIn }) {
+    state.refreshToken = refreshToken
+    localStorage.setItem('expirationDateTime', Date.now() + expiresIn * 1000) // idTokenの有効期限が切れるUNIX TIME
+    localStorage.setItem('refreshToken', refreshToken)
   },
   updateDisplayName(state, displayName) {
     state.displayName = displayName
+    localStorage.setItem('displayName', displayName)
   }
 }
 
@@ -33,9 +41,16 @@ export const actions = {
         displayName: authData.userName,
         returnSecureToken: true
       })
-      commit('updateIdToken', response.data.idToken)
-      commit('updateDisplayName', authData.userName)
 
+      // responseをstoreとlocalstrageに保存する
+      commit('updateDisplayName', authData.userName)
+      dispatch('saveAuthData', {
+        idToken: response.data.idToken,
+        refreshToken: response.data.refreshToken,
+        expiresIn: response.data.expiresIn
+      })
+
+      // tokenの有効期限が切れる前にリフレッシュする処理を開始する
       setTimeout(() => {
         dispatch('refreshToken', response.data.refreshToken)
       }, response.data.expiresIn * 1000)
@@ -59,20 +74,64 @@ export const actions = {
           returnSecureToken: true
         }
       )
-      commit('updateIdToken', response.data.idToken)
-      commit('updateDisplayName', response.data.displayName)
 
+      // responseをstoreとlocalstrageに保存する
+      commit('updateDisplayName', response.data.displayName)
+      dispatch('saveAuthData', {
+        idToken: response.data.idToken,
+        refreshToken: response.data.refreshToken,
+        expiresIn: response.data.expiresIn
+      })
+
+      // tokenの有効期限が切れる前に定期的にtokenをリフレッシュする処理を開始する
       setTimeout(() => {
         dispatch('refreshToken', response.data.refreshToken)
-      }, response.data.expiresIn * 1000)
+      }, localStorage.getItem('expirationDateTime') - Date.now())
+
       return true
     } catch (error) {
       return false
     }
   },
 
+  // localstrageの情報からidTokenを取得、storeに保存してログイン状態にする
+  // idTokenの有効期限が切れている場合はリフレッシュしてからidTokenをstoreに保存する
+  autoLogin({ commit, dispatch }) {
+    // idTokenが有効期限切れであればリフレッシュしてログイン状態に移行する
+    if (Date.now() >= localStorage.getItem('expirationDateTime')) {
+      console.log(
+        `${Date.now()}, start to refresh:${localStorage.getItem(
+          'refreshToken'
+        )}`
+      )
+      dispatch('refreshToken', localStorage.getItem('refreshToken'))
+    }
+
+    // idTokenが有効期限内であればlocalstrageの認証をstoreに保存し、
+    // tokenの有効期限が切れる前にリフレッシュする処理を開始する
+    else {
+      console.log('no need to refresh now')
+      commit('updateIdToken', localStorage.getItem('idToken'))
+      setTimeout(() => {
+        console.log(
+          `${Date.now()}, start to refresh:${localStorage.getItem(
+            'refreshToken'
+          )}`
+        )
+        dispatch('refreshToken', localStorage.getItem('refreshToken'))
+      }, localStorage.getItem('expirationDateTime') - Date.now())
+    }
+  },
+
+  // 引数で受け取った認証情報をstoreとlocalstrageに保存する
+  // displayNameはリフレッシュ時には更新しないのでこの関数の外でcommitする
+  saveAuthData({ commit }, { idToken, refreshToken, expiresIn }) {
+    commit('updateIdToken', idToken)
+    commit('updateRefreshToken', { refreshToken, expiresIn })
+  },
+
   // 引数で受け取ったrefreshTokenを使ってidTokenをrefreshする
-  refreshToken({ commit, dispatch }, refreshToken) {
+  refreshToken({ dispatch }, refreshToken) {
     try {
       axiosAuthRefresh
         .post('/token?key=' + process.env.API_KEY, {
@@ -80,7 +139,11 @@ export const actions = {
           refresh_token: refreshToken
         })
         .then((response) => {
-          commit('updateIdToken', response.data.id_token)
+          dispatch('saveAuthData', {
+            idToken: response.data.id_token,
+            refreshToken: response.data.refresh_token,
+            expiresIn: response.data.expires_in
+          })
 
           setTimeout(() => {
             dispatch('refreshToken', response.data.refresh_token)

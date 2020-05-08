@@ -72,5 +72,8 @@ export default {
   },
   env: {
     API_KEY
+  },
+  router: {
+    middleware: ['beforeEnter/stateControl']
   }
 }
