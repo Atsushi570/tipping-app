@@ -7,7 +7,6 @@ export default ({ route, store, redirect }) => {
 
     // storeにidTokenが存在しないがlocalstrageにidTokenが存在する場合、自動ログインを実施する
   } else if (localIdToken) {
-    console.log('dispatch autoLogin')
     store.commit('auth/updateDisplayName', localStorage.getItem('displayName'))
     store.dispatch('auth/autoLogin').then(() => {
       if (route.path !== '/dashboard') redirect('/dashboard')

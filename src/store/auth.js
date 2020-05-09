@@ -99,25 +99,14 @@ export const actions = {
   autoLogin({ commit, dispatch }) {
     // idTokenが有効期限切れであればリフレッシュしてログイン状態に移行する
     if (Date.now() >= localStorage.getItem('expirationDateTime')) {
-      console.log(
-        `${Date.now()}, start to refresh:${localStorage.getItem(
-          'refreshToken'
-        )}`
-      )
       dispatch('refreshToken', localStorage.getItem('refreshToken'))
     }
 
     // idTokenが有効期限内であればlocalstrageの認証をstoreに保存し、
     // tokenの有効期限が切れる前にリフレッシュする処理を開始する
     else {
-      console.log('no need to refresh now')
       commit('updateIdToken', localStorage.getItem('idToken'))
       setTimeout(() => {
-        console.log(
-          `${Date.now()}, start to refresh:${localStorage.getItem(
-            'refreshToken'
-          )}`
-        )
         dispatch('refreshToken', localStorage.getItem('refreshToken'))
       }, localStorage.getItem('expirationDateTime') - Date.now())
     }
