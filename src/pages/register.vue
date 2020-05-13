@@ -8,7 +8,6 @@
         label="ユーザ名"
         type="text"
         place-holder="Your Name"
-        :content="formUserName"
         :error-message="validateUserName"
       ></formInput>
       <formInput
@@ -16,7 +15,6 @@
         label="メールアドレス"
         type="Email"
         place-holder="your.email@example.com"
-        :content="formEmail"
         :error-message="validateEmail"
       ></formInput>
       <formInput
@@ -24,7 +22,6 @@
         label="パスワード"
         type="password"
         place-holder="Password"
-        :content="formPassword"
         :error-message="validatePassword"
       ></formInput>
 

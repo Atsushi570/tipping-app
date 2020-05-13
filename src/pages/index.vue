@@ -8,7 +8,6 @@
         label="メールアドレス"
         type="Email"
         place-holder="your.email@example.com"
-        :content="formEmail"
         :error-message="formEmail.errorMessage"
       ></formInput>
       <formInput
@@ -16,7 +15,6 @@
         label="パスワード"
         type="password"
         place-holder="Password"
-        :content="formPassword"
         :error-message="formPassword.errorMessage"
       ></formInput>
 

@@ -23,10 +23,6 @@
 <script>
 export default {
   props: {
-    content: {
-      required: true,
-      type: Object
-    },
     errorMessage: {
       required: false,
       type: String,
