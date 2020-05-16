@@ -21,9 +21,7 @@ beforeEach(() => {
     store: new Vuex.Store({
       actions: {
         'auth/register': () => {
-          return new Promise((resolve) => {
-            resolve(true)
-          })
+          return Promise.resolve(true)
         }
       },
       mutations: {},
@@ -45,9 +43,7 @@ beforeEach(() => {
     store: new Vuex.Store({
       actions: {
         'auth/register': () => {
-          return new Promise((resolve) => {
-            resolve(false)
-          })
+          return Promise.resolve(false)
         }
       },
       mutations: {},

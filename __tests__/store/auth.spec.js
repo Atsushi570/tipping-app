@@ -2,7 +2,11 @@
 import Vuex from 'vuex'
 import { createLocalVue } from '@vue/test-utils'
 import axios from 'axios'
+import LocalStorageMock from '../../__mocks__/localstrage'
 import * as auth from '~/store/auth'
+
+// テストでlocalStrageを使用できるようモックを定義する
+localStorage = new LocalStorageMock()
 
 // テストでtimerを操作できるようfakeTimerを宣言する
 jest.useFakeTimers()
@@ -39,26 +43,6 @@ const store = new Vuex.Store(auth)
 // テスト対象のactionsに必要な引数の定義
 // テスト毎に変更する
 const payload = { userName: testDisplayName }
-
-// ブラウザのlocalstrageをモックするクラス
-class LocalStorageMock {
-  constructor() {
-    this.store = {}
-  }
-
-  clear() {
-    this.store = {}
-  }
-
-  getItem(key) {
-    return this.store[key] || null
-  }
-
-  setItem(key, value) {
-    this.store[key] = value.toString()
-  }
-}
-localStorage = new LocalStorageMock()
 
 beforeEach(() => {
   // テスト前にglobalのlocalstrageとrefreshTokenSpyを初期化する
