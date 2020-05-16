@@ -54,7 +54,6 @@ export const actions = {
       setTimeout(() => {
         dispatch('refreshToken', response.data.refreshToken)
       }, response.data.expiresIn * 1000)
-
       return true
     } catch (error) {
       return false
@@ -120,24 +119,25 @@ export const actions = {
   },
 
   // 引数で受け取ったrefreshTokenを使ってidTokenをrefreshする
-  refreshToken({ dispatch }, refreshToken) {
+  async refreshToken({ dispatch }, refreshToken) {
     try {
-      axiosAuthRefresh
-        .post('/token?key=' + process.env.API_KEY, {
+      const response = await axiosAuthRefresh.post(
+        '/token?key=' + process.env.API_KEY,
+        {
           grant_type: 'refresh_token',
           refresh_token: refreshToken
-        })
-        .then((response) => {
-          dispatch('saveAuthData', {
-            idToken: response.data.id_token,
-            refreshToken: response.data.refresh_token,
-            expiresIn: response.data.expires_in
-          })
+        }
+      )
 
-          setTimeout(() => {
-            dispatch('refreshToken', response.data.refresh_token)
-          }, response.data.expires_in * 1000)
-        })
+      dispatch('saveAuthData', {
+        idToken: response.data.id_token,
+        refreshToken: response.data.refresh_token,
+        expiresIn: response.data.expires_in
+      })
+
+      setTimeout(() => {
+        dispatch('refreshToken', response.data.refresh_token)
+      }, response.data.expires_in * 1000)
     } catch (error) {}
   }
 }
