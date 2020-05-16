@@ -158,7 +158,7 @@ describe('store/auth.jsのテスト', () => {
     })
 
     describe('autoLoginのテスト', () => {
-      test('idTokenが有効期限外の時、refreshTokenを実行すること', async () => {
+      test('idTokenが有効期限外の時、refreshTokenを実行すること', () => {
         // autoLoginを呼び出す
         action = 'autoLogin'
         testedAction(store, payload)
@@ -167,7 +167,7 @@ describe('store/auth.jsのテスト', () => {
         expect(refreshTokenSpy).toHaveBeenCalledTimes(1)
       })
 
-      test('idTokenが有効期限内の時、refreshTokenを実行すること', async () => {
+      test('idTokenが有効期限内の時、refreshTokenを実行すること', () => {
         // テストに必要なlocalstrageを更新する'
         localStorage.setItem('expirationDateTime', Date.now() + 10000)
         localStorage.setItem('idToken', testIdToken)
