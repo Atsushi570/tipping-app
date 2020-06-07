@@ -1,5 +1,13 @@
 require('dotenv').config()
-const { API_KEY } = process.env
+const {
+  API_KEY,
+  AUTH_DOMAIN,
+  DATABASE_URL,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID
+} = process.env
 
 export default {
   srcDir: 'src/',
@@ -66,12 +74,22 @@ export default {
       }
     },
     /*
-     ** You can extend webpack config here
+     ** クライアントサイドでfsモジュールを使用するのを防ぐ
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      config.node = {
+        fs: 'empty'
+      }
+    }
   },
   env: {
-    API_KEY
+    API_KEY,
+    AUTH_DOMAIN,
+    DATABASE_URL,
+    PROJECT_ID,
+    STORAGE_BUCKET,
+    MESSAGING_SENDER_ID,
+    APP_ID
   },
   router: {
     middleware: ['beforeEnter/stateControl']
