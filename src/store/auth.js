@@ -4,8 +4,15 @@ import axiosAuthRefresh from '~/plugins/axiosAuthRefresh.js'
 export const state = () => ({
   idToken: null,
   refreshToken: null,
-  displayName: null
+  displayName: null,
+  uid: null
 })
+
+export const getters = {
+  displayName(state) {
+    return state.displayName
+  }
+}
 
 export const mutations = {
   updateIdToken(state, idToken) {
@@ -20,6 +27,10 @@ export const mutations = {
   updateDisplayName(state, displayName) {
     state.displayName = displayName
     localStorage.setItem('displayName', displayName)
+  },
+  updateUid(state, uid) {
+    state.uid = uid
+    localStorage.setItem('uid', uid)
   }
 }
 
@@ -44,6 +55,7 @@ export const actions = {
 
       // responseをstoreとlocalstrageに保存する
       commit('updateDisplayName', authData.userName)
+      commit('updateUid', response.data.localId)
       dispatch('saveAuthData', {
         idToken: response.data.idToken,
         refreshToken: response.data.refreshToken,
@@ -76,6 +88,7 @@ export const actions = {
 
       // responseをstoreとlocalstrageに保存する
       commit('updateDisplayName', response.data.displayName)
+      commit('updateUid', response.data.localId)
       dispatch('saveAuthData', {
         idToken: response.data.idToken,
         refreshToken: response.data.refreshToken,

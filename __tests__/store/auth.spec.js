@@ -18,6 +18,7 @@ const testIdToken = 'idToken'
 const testRefreshToken = 'refreshToken'
 const testExpiresIn = 0
 const testDisplayName = 'displayName'
+const testUid = 'testUid'
 let mockAxiosPostResult = null
 
 jest.mock('~/plugins/axiosAuth.js', () => ({
@@ -55,7 +56,8 @@ beforeEach(() => {
       idToken: testIdToken,
       refreshToken: testRefreshToken,
       expiresIn: testExpiresIn,
-      displayName: testDisplayName
+      displayName: testDisplayName,
+      localId: testUid
     }
   }
 })
@@ -77,10 +79,12 @@ describe('store/auth.jsのテスト', () => {
         expect(store.state.idToken).toBe(testIdToken)
         expect(store.state.refreshToken).toBe(testRefreshToken)
         expect(store.state.displayName).toBe(testDisplayName)
+        expect(store.state.uid).toBe(testUid)
         expect(localStorage.idToken).toBe(testIdToken)
         expect(localStorage.expirationDateTime).not.toBe(undefined)
         expect(localStorage.refreshToken).toBe(testRefreshToken)
         expect(localStorage.displayName).toBe(payload.userName)
+        expect(localStorage.uid).toBe(testUid)
         expect(refreshTokenSpy).toHaveBeenCalledTimes(1)
       })
 
@@ -117,9 +121,11 @@ describe('store/auth.jsのテスト', () => {
         expect(store.state.refreshToken).toBe(testRefreshToken)
         expect(store.state.displayName).toBe(testDisplayName)
         expect(localStorage.idToken).toBe(testIdToken)
+        expect(localStorage.uid).toBe(testUid)
         expect(localStorage.expirationDateTime).not.toBe(undefined)
         expect(localStorage.refreshToken).toBe(testRefreshToken)
         expect(localStorage.displayName).toBe(payload.userName)
+        expect(localStorage.uid).toBe(testUid)
         expect(refreshTokenSpy).toHaveBeenCalledTimes(1)
       })
 
