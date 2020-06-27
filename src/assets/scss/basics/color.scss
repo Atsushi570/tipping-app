@@ -1,0 +1,53 @@
+$color-lists: (
+  'black': $black,
+  'disabled': $gray,
+  'disabled-text': rgba($white, 0.5),
+  'green': $green,
+  'red': $red,
+  'white': $white,
+  'yellow': $yellow
+);
+
+/* background-color */
+@each $name, $color in $color-lists {
+  .basics-color-#{$name} {
+    @include background($color);
+  }
+}
+
+.basics-color-grad {
+  background: $grad;
+}
+
+/* error color */
+.basics-color-error {
+  background: rgba($red, 0.5);
+}
+
+/* 背景色を設定しない */
+.basics-color-none {
+  background: none;
+}
+
+/* 背景色が白の時、ホバー時の判別がしやすいよう設定 */
+.basics-color-white:hover {
+  background: rgba($gray, 0.2);
+}
+
+/* 主にtextInput & textarea用 */
+.basics-color-yellow05 {
+  @include background($yellow, 0.5);
+}
+
+/* font & icon color */
+@each $name, $color in $color-lists {
+  .basics-font-color-#{$name},
+  .basics-icon-left-color-#{$name},
+  .basics-icon-right-color-#{$name} {
+    color: $color;
+  }
+}
+
+.basics-font-color-black05 {
+  color: rgba($black, 0.5);
+}

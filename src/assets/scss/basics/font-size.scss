@@ -1,0 +1,23 @@
+/* heading 2 ~ 5 */
+@for $heading from 2 through 5 {
+  .basics-font-size-space-h#{$heading} {
+    @include font-size-space(10 - $heading);
+  }
+}
+
+$font-size-lists: (
+  'small': 2,
+  'middle': 3,
+  'large': 4
+);
+
+/* font-size */
+@each $name, $font-size in $font-size-lists {
+  .basics-font-size-space-#{$name} {
+    @include font-size-space($font-size);
+  }
+
+  .basics-font-size-#{$name} {
+    @include font-size($font-size);
+  }
+}

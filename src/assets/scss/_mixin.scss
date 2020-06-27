@@ -1,0 +1,59 @@
+@mixin background($color, $opacity: 1) {
+  background: rgba($color, $opacity);
+
+  &:focus {
+    background: rgba($color, $opacity / 2);
+  }
+}
+
+@mixin scrollBar($track: $white, $thumb: $yellow) {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $track;
+    border-radius: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb;
+    border-radius: 16px;
+  }
+}
+
+@mixin size($width, $height: auto) {
+  width: 80px * $width;
+
+  @if $height == auto {
+    height: auto;
+  } @else {
+    @extend %flex__verti;
+
+    height: 80px * $height;
+  }
+}
+
+@mixin font-size($num) {
+  font-size: 8px * $num;
+  font-weight: normal;
+  line-height: normal;
+}
+
+@mixin font-size-space($num) {
+  font-size: 8px * $num;
+  font-weight: normal;
+
+  @if $num >= 5 {
+    padding-bottom: 8px * ($num - 2);
+    line-height: 8px * $num;
+  } @else if 2 < $num and $num < 5 {
+    padding-bottom: 24px;
+    line-height: normal;
+  } @else {
+    padding-bottom: 8px * $num;
+    line-height: normal;
+  }
+}
