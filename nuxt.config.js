@@ -33,10 +33,6 @@ export default {
    */
   loading: { color: '#fff' },
   /*
-   ** Global CSS
-   */
-  css: ['ress', '~/assets/css/global.css'],
-  /*
    ** Plugins to load before mounting the App
    */
   plugins: [],
@@ -55,7 +51,28 @@ export default {
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/
     '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources'
+  ],
+  /*
+   ** Global CSS
+   */
+  styleResources: {
+    scss: [
+      '~assets/scss/_variables.scss',
+      '~/assets/scss/_inheritances.scss',
+      '~/assets/scss/_mixin.scss'
+    ]
+  },
+  css: [
+    'ress',
+    '~/assets/css/global.css',
+    { src: '~/assets/scss/basics/align.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/color.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/font-size.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/rounded.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/size.scss', lang: 'sass' },
+    { src: '~/assets/scss/common.scss', lang: 'sass' }
   ],
   /*
    ** Axios module configuration
@@ -76,7 +93,7 @@ export default {
     /*
      ** クライアントサイドでfsモジュールを使用するのを防ぐ
      */
-    extend(config, ctx) {
+    extend(config) {
       config.node = {
         fs: 'empty'
       }
@@ -94,4 +111,8 @@ export default {
   router: {
     middleware: ['beforeEnter/stateControl']
   }
+}
+
+module.exports = {
+  modules: ['@nuxtjs/style-resources']
 }
