@@ -1,0 +1,2 @@
+#.storybookディレクトリもeslintとprettierを有効にする
+!.storybook/
