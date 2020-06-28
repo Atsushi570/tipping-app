@@ -17,6 +17,7 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    "no-undef": "off",
     'prettier/prettier': [
       'error',
       {
