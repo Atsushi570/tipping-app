@@ -10,14 +10,16 @@
 
   &__between {
     @extend %flex;
+
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
   &__verti {
     @extend %flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
   }
 }
 
