@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     spaceArround() {
-      const space = this.fontSize === 'small' ? '8px' : '16px'
+      const space = this.size === 'is-small' ? '8px' : '16px'
       return (
         /* sizeがsmallだと8pxのpadding */
         `padding-left:${space}; padding-right:${space}`
