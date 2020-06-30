@@ -8,7 +8,7 @@
       'basics-align-' + (align || 'center')
     ]"
   >
-    <slot></slot>
+    {{ text }}
   </component>
 </template>
 
@@ -18,7 +18,8 @@ export default {
     level: String,
     fontSize: String,
     fontColor: String,
-    align: String
+    align: String,
+    text: String
   },
   computed: {
     leftSpace() {

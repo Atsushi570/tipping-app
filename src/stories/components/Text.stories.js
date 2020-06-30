@@ -8,12 +8,12 @@ storiesOf('atoms.Text', module)
       components: { MyText },
       template: `
       <div style="display: flex; flex-direction:column; align-items:center;">
-        <MyText level="h2">h2</MyText>
-        <MyText level="h3">h3</MyText>
-        <MyText level="h4">h4</MyText>
-        <MyText level="h5">h5</MyText>
-        <MyText level="p">p</MyText>
-        <MyText level="label">label</MyText>
+        <MyText text="h2" level="h2" />
+        <MyText text="h3" level="h3" />
+        <MyText text="h4" level="h4" />
+        <MyText text="h5" level="h5" />
+        <MyText text="p" level="p" />
+        <MyText text="label" level="label" />
       </div>
       `
     }),
@@ -27,9 +27,9 @@ storiesOf('atoms.Text', module)
       components: { MyText },
       template: `
         <div style="display: flex; flex-direction:column; align-items:center;">
-        <MyText level="p" font-size="small">small</MyText>
-        <MyText level="p" font-size="middle">middle</MyText>
-        <MyText level="p" font-size="large">large</MyText>
+        <MyText text="small" level="p" font-size="small" />
+        <MyText text="middle" level="p" font-size="middle" />
+        <MyText text="large" level="p" font-size="large" />
         </div>
         `
     }),
@@ -43,9 +43,9 @@ storiesOf('atoms.Text', module)
       components: { MyText },
       template: `
         <div style="display: flex; flex-direction:column; align-items:center;">
-        <MyText level="p" font-size="large" font-color="black">black</MyText>
-        <MyText level="p" font-size="large" font-color="red">red</MyText>
-        <MyText level="p" font-size="large" font-color="green">green</MyText>
+        <MyText text="black" level="p" font-size="large" font-color="black" />
+        <MyText text="red" level="p" font-size="large" font-color="red" />
+        <MyText text="green" level="p" font-size="large" font-color="green" />
         </div>
         `
     }),
@@ -59,9 +59,9 @@ storiesOf('atoms.Text', module)
       components: { MyText },
       template: `
         <div style="display: flex; flex-direction:column;">
-        <MyText level="p" font-size="large" align="left">left</MyText>
-        <MyText level="p" font-size="large" align="center">center</MyText>
-        <MyText level="p" font-size="large" align="right">right</MyText>
+        <MyText text="left" level="p" font-size="large" align="left" />
+        <MyText text="center" level="p" font-size="large" align="center" />
+        <MyText text="right" level="p" font-size="large" align="right" />
         </div>
         `
     }),
