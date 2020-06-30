@@ -37,3 +37,20 @@ storiesOf('atoms.Button', module)
       notes: 'some documentation here'
     }
   )
+  .add(
+    'align',
+    () => ({
+      components: { Button },
+      template: `
+        <div style="display: flex; flex-direction:column;">
+          <Button colors="is-primary" @click="action" btn-text="left" align="left" style="margin: 16px 0;"></Button>
+          <Button colors="is-primary" @click="action" btn-text="center" align="center" style="margin: 16px 0;"></Button>
+          <Button colors="is-primary" @click="action" btn-text="right" align="right" style="margin: 16px 0;"></Button>
+        </div>
+      `,
+      methods: { action: action('クリックされました') }
+    }),
+    {
+      notes: 'some documentation here'
+    }
+  )

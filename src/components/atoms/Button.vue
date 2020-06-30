@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="'basics-align-' + (align || 'center')">
     <button
       :class="['button', colors || 'is-primary', size || 'is-normal']"
       @click="clickHandler"
@@ -16,6 +16,7 @@
 <script>
 export default {
   props: {
+    align: String,
     btnText: String,
     colors: String,
     size: String
