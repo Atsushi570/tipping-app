@@ -1,7 +1,9 @@
 <template>
   <component
     :is="level || 'p'"
+    :noSpace="noSpace"
     :class="[
+      'text',
       'basics-font-size-space-' +
         (level === 'p' || level === 'label' ? fontSize || 'middle' : level),
       'basics-font-color-' + (fontColor || 'black'),
@@ -16,6 +18,7 @@
 export default {
   props: {
     level: String,
+    noSpace: Boolean,
     fontSize: String,
     fontColor: String,
     align: String,
@@ -35,3 +38,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.text {
+  &[noSpace] {
+    padding-bottom: 0;
+  }
+}
+</style>
