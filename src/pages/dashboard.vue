@@ -103,6 +103,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  margin: 10vw 0;
+}
 .welcomeMessage {
   display: flex;
   justify-content: space-between;
