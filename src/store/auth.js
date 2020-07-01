@@ -9,8 +9,8 @@ export const state = () => ({
 })
 
 export const getters = {
-  displayName(state) {
-    return state.displayName
+  uid(state) {
+    return state.uid
   }
 }
 
@@ -151,6 +151,8 @@ export const actions = {
       setTimeout(() => {
         dispatch('refreshToken', response.data.refresh_token)
       }, response.data.expires_in * 1000)
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
