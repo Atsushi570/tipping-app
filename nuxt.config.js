@@ -59,7 +59,7 @@ export default {
    */
   styleResources: {
     scss: [
-      '~assets/scss/_variables.scss',
+      '~/assets/scss/_variables.scss',
       '~/assets/scss/_inheritances.scss',
       '~/assets/scss/_mixin.scss'
     ]
