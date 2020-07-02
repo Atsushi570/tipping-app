@@ -2,6 +2,7 @@
   <div :class="'basics-align-' + (align || 'center')">
     <button
       :class="['button', colors || 'is-primary', size || 'is-normal']"
+      :Disabled="disable"
       @click="clickHandler"
     >
       <slot>
@@ -19,7 +20,8 @@ export default {
     align: String,
     btnText: String,
     colors: String,
-    size: String
+    size: String,
+    disable: Boolean
   },
   computed: {
     spaceArround() {
