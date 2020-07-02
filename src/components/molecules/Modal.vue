@@ -60,5 +60,8 @@ export default {
   .delete {
     transform: translate(10px, -15px);
   }
+  .modal-card-foot [level='p'] {
+    margin-left: auto;
+  }
 }
 </style>
