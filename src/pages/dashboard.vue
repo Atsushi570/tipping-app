@@ -40,6 +40,7 @@
       <TextInput
         class="tipping-value"
         v-if="modal.type === 'tipping'"
+        @input="updateTippingValue"
       ></TextInput>
     </Modal>
   </div>
@@ -68,7 +69,8 @@ export default {
       modal: {
         isActive: false,
         type: ''
-      }
+      },
+      tippingValue: ''
     }
   },
   computed: {
@@ -97,6 +99,9 @@ export default {
     },
     closeModal() {
       this.modal.isActive = false
+    },
+    updateTippingValue(value) {
+      this.tippingValue = value
     }
   }
 }
