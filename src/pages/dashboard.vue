@@ -27,6 +27,7 @@
     <Modal
       v-if="modal.isActive"
       :is-active="modal.isActive"
+      :disableTippingButton="disableTippingButton"
       :title-text="modalTitle"
       :modal-type="modal.type"
       @clickClose="closeModal"
@@ -65,12 +66,12 @@ export default {
   },
   data() {
     return {
+      tippingValue: '',
       selectedUser: null,
       modal: {
         isActive: false,
         type: ''
-      },
-      tippingValue: ''
+      }
     }
   },
   computed: {
@@ -83,6 +84,14 @@ export default {
       return this.modal.type === 'wallet'
         ? `${this.selectedUser.displayName}さんの残高`
         : '送る金額'
+    },
+    // tippingValueが1以上の整数の場合にtrueを返す
+    disableTippingButton() {
+      const numberTippingValue = Number(this.tippingValue)
+      const isValidInput =
+        Number.isInteger(numberTippingValue) && numberTippingValue > 0
+
+      return this.modal.type === 'tipping' && !isValidInput
     }
   },
   // Vueインスタンスが削除されるときにFirebaseの購読を停止する

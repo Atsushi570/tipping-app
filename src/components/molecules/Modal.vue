@@ -20,6 +20,7 @@
           colors="is-danger"
           btn-text="Cancel"
           level="p"
+          :disable="disableTippingButton"
           @click="clickClose"
         ></Button>
       </footer>
@@ -40,6 +41,7 @@ export default {
   },
   props: {
     isActive: Boolean,
+    disableTippingButton: Boolean,
     titleText: String,
     bodyText: String
   },
