@@ -1,4 +1,5 @@
 import firebase from '~/plugins/firebase'
+const db = firebase.firestore()
 
 export const state = () => ({
   unsubscribe: null,
@@ -40,5 +41,20 @@ export const actions = {
   // ドキュメントの監視をやめる
   unsubscribe({ state }) {
     state.unsubscribe()
+  },
+
+  // 引数で指定したuidをキーにしてドキュメントを新規作成する
+  // フィールドには引数で指定したdisplayNameと2000のwalletを追加する
+  // eslint-disable-next-line no-empty-pattern
+  async initUserDocument({}, { uid, displayName }) {
+    const result = await db
+      .collection('users')
+      .doc(uid)
+      .set({
+        displayName,
+        wallet: 2000
+      })
+    console.log(result)
+    return true
   }
 }
