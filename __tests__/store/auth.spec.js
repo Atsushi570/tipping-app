@@ -34,7 +34,9 @@ const testedAction = (context = {}, payload = {}) => {
 }
 
 // refreshTokenの呼び出しを監視するspyの定義
-const refreshTokenSpy = jest.spyOn(auth.actions, 'refreshToken')
+const refreshTokenSpy = jest
+  .spyOn(auth.actions, 'refreshToken')
+  .mockReturnValue('')
 
 // テスト対象のactionsがmutationを呼び出せるようactionsに渡すstoreを定義
 const localVue = createLocalVue()
