@@ -12,7 +12,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "jest --config jest.config.js"
+    "test": "jest --config jest.config.js --coverage"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
