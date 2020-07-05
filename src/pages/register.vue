@@ -115,14 +115,14 @@ export default {
         password: this.formPassword.input
       })
 
-      const initDocumentResult = await this.$store.dispatch(
-        'firestore/initUserDocument',
-        { displayName: this.formUserName.input, uid: this.uid }
-      )
-      console.log(initDocumentResult)
-
       this.isRegisterFailed = !registerResult
-      if (registerResult) this.$router.push('dashboard')
+      if (registerResult) {
+        await this.$store.dispatch('firestore/initUserDocument', {
+          displayName: this.formUserName.input,
+          uid: this.uid
+        })
+        this.$router.push('dashboard')
+      }
     }
   }
 }
