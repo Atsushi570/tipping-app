@@ -1,5 +1,4 @@
-import axiosAuth from '~/plugins/axiosAuth.js'
-import axiosAuthRefresh from '~/plugins/axiosAuthRefresh.js'
+import * as axiosFirebaseAuth from '~/plugins/axiosFirebaseAuth.js'
 
 export const state = () => ({
   idToken: null,
@@ -39,15 +38,12 @@ export const actions = {
   // すべて成功した場合にidTokenとuserNameをstoreに格納する
   async register({ commit, dispatch }, authData) {
     try {
-      const response = await axiosAuth.post(
-        '/accounts:signUp?key=' + process.env.API_KEY,
-        {
-          email: authData.email,
-          password: authData.password,
-          returnSecureToken: true
-        }
-      )
-      await axiosAuth.post('accounts:update?key=' + process.env.API_KEY, {
+      const response = await axiosFirebaseAuth.signUp.post(null, {
+        email: authData.email,
+        password: authData.password,
+        returnSecureToken: true
+      })
+      await axiosFirebaseAuth.update.post(null, {
         idToken: response.data.idToken,
         displayName: authData.userName,
         returnSecureToken: true
@@ -77,14 +73,11 @@ export const actions = {
   // ログイン失敗時はresponse内のrefreshTokenとexpiresInを元に定期的にtokenをリフレッシュする
   async login({ commit, dispatch }, authData) {
     try {
-      const response = await axiosAuth.post(
-        '/accounts:signInWithPassword?key=' + process.env.API_KEY,
-        {
-          email: authData.email,
-          password: authData.password,
-          returnSecureToken: true
-        }
-      )
+      const response = await axiosFirebaseAuth.signIn.post(null, {
+        email: authData.email,
+        password: authData.password,
+        returnSecureToken: true
+      })
 
       // responseをstoreとlocalstrageに保存する
       commit('updateDisplayName', response.data.displayName)
@@ -134,13 +127,10 @@ export const actions = {
   // 引数で受け取ったrefreshTokenを使ってidTokenをrefreshする
   async refreshToken({ dispatch }, refreshToken) {
     try {
-      const response = await axiosAuthRefresh.post(
-        '/token?key=' + process.env.API_KEY,
-        {
-          grant_type: 'refresh_token',
-          refresh_token: refreshToken
-        }
-      )
+      const response = await axiosFirebaseAuth.refresh.post(null, {
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken
+      })
 
       dispatch('saveAuthData', {
         idToken: response.data.id_token,

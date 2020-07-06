@@ -4,6 +4,7 @@ import { createLocalVue } from '@vue/test-utils'
 import axios from 'axios'
 import LocalStorageMock from '../../__mocks__/localstrage'
 import * as auth from '~/store/auth'
+import * as axiosFirebaseAuth from '~/plugins/axiosFirebaseAuth.js'
 
 // テストでlocalStrageを使用できるようモックを定義する
 localStorage = new LocalStorageMock()
@@ -21,10 +22,9 @@ const testDisplayName = 'displayName'
 const testUid = 'testUid'
 let mockAxiosPostResult = null
 
-jest.mock('~/plugins/axiosAuth.js', () => ({
-  post: jest.fn(() => Promise.resolve(mockAxiosPostResult)),
-  create: jest.fn()
-}))
+function createMock(target) {
+  return jest.spyOn(target, 'post').mockReturnValue(mockAxiosPostResult)
+}
 
 // テスト対象のactionsを定義
 // 呼び出すactionはテスト毎に変更する
@@ -69,6 +69,10 @@ describe('store/auth.jsのテスト', () => {
   describe('actionsのテスト', () => {
     describe('registerのテスト', () => {
       test('新規登録のPOSTが成功したとき、trueが返り、idTokenなどの認証情報をstoreとlocalstrageに保存できること', async () => {
+        // 使用するaxiosインスタンスのmockを定義
+        const firebaseSignUpMock = createMock(axiosFirebaseAuth.signUp)
+        const firebaseUpdateMock = createMock(axiosFirebaseAuth.update)
+
         // registerを呼び出す
         action = 'register'
         const result = await testedAction(store, payload)
@@ -78,6 +82,8 @@ describe('store/auth.jsのテスト', () => {
 
         // storeとlocalstrageに各種データが保存されること
         expect(result).toBe(true)
+        expect(firebaseSignUpMock).toHaveBeenCalled()
+        expect(firebaseUpdateMock).toHaveBeenCalled()
         expect(store.state.idToken).toBe(testIdToken)
         expect(store.state.refreshToken).toBe(testRefreshToken)
         expect(store.state.displayName).toBe(testDisplayName)
@@ -96,6 +102,9 @@ describe('store/auth.jsのテスト', () => {
           throw new Error('error')
         }
 
+        // 使用するaxiosインスタンスのmockを定義
+        const firebaseSignUpMock = createMock(axiosFirebaseAuth.signUp)
+
         // registerを呼び出す
         action = 'register'
         const result = await testedAction(store, payload)
@@ -105,11 +114,15 @@ describe('store/auth.jsのテスト', () => {
 
         // storeとlocalstrageに各種データが保存されること
         expect(result).toBe(false)
+        expect(firebaseSignUpMock).toHaveBeenCalled()
       })
     })
 
     describe('loginのテスト', () => {
       test('loginのPOSTが成功したとき、戻り値のidTokenなどの認証情報をstoreとlocalstrageに保存できること', async () => {
+        // 使用するaxiosインスタンスのmockを定義
+        const firebaseSignInMock = createMock(axiosFirebaseAuth.signIn)
+
         // loginを呼び出す
         action = 'login'
         const result = await testedAction(store, payload)
@@ -119,6 +132,7 @@ describe('store/auth.jsのテスト', () => {
 
         // storeとlocalstrageに各種データが保存されること
         expect(result).toBe(true)
+        expect(firebaseSignInMock).toHaveBeenCalled()
         expect(store.state.idToken).toBe(testIdToken)
         expect(store.state.refreshToken).toBe(testRefreshToken)
         expect(store.state.displayName).toBe(testDisplayName)
@@ -137,6 +151,9 @@ describe('store/auth.jsのテスト', () => {
           throw new Error('error')
         }
 
+        // 使用するaxiosインスタンスのmockを定義
+        const firebaseSignInMock = createMock(axiosFirebaseAuth.signIn)
+
         // loginを呼び出す
         action = 'login'
         const result = await testedAction(store, payload)
@@ -146,6 +163,7 @@ describe('store/auth.jsのテスト', () => {
 
         // storeとlocalstrageに各種データが保存されること
         expect(result).toBe(false)
+        expect(firebaseSignInMock).toHaveBeenCalled()
       })
     })
 
