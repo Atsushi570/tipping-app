@@ -1,0 +1,441 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms.Button align 1`] = `
+<div
+  style="display: flex; flex-direction: column;"
+>
+  <div
+    class="basics-align-left"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        left
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        center
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-right"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        right
+      
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots atoms.Button colors 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-primary
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-info is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-info
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-danger is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-danger
+      
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots atoms.Button disable 1`] = `
+<div
+  style="display: flex; flex-direction: column;"
+>
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-enable
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary  is-normal"
+      disabled="true"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-disable
+      
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots atoms.Button size 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-small"
+    >
+      <span
+        style="padding-left: 8px; padding-right: 8px;"
+      >
+        
+        small
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-normal"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        normal
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-medium"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        medium
+      
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots atoms.CloseButton default 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <button
+    aria-label="close"
+    class="delete"
+    style="margin: 16px 0px;"
+  />
+</div>
+`;
+
+exports[`Storyshots atoms.Text align 1`] = `
+<div
+  style="display: flex; flex-direction: column;"
+>
+  <p
+    class="text basics-font-size-space-large basics-font-color-black basics-align-left"
+  >
+    
+  left
+
+  </p>
+   
+  <p
+    class="text basics-font-size-space-large basics-font-color-black basics-align-center"
+  >
+    
+  center
+
+  </p>
+   
+  <p
+    class="text basics-font-size-space-large basics-font-color-black basics-align-right"
+  >
+    
+  right
+
+  </p>
+</div>
+`;
+
+exports[`Storyshots atoms.Text color 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <p
+    class="text basics-font-size-space-large basics-font-color-black basics-align-center"
+  >
+    
+  black
+
+  </p>
+   
+  <p
+    class="text basics-font-size-space-large basics-font-color-red basics-align-center"
+  >
+    
+  red
+
+  </p>
+   
+  <p
+    class="text basics-font-size-space-large basics-font-color-green basics-align-center"
+  >
+    
+  green
+
+  </p>
+</div>
+`;
+
+exports[`Storyshots atoms.Text fontSize 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <p
+    class="text basics-font-size-space-small basics-font-color-black basics-align-center"
+  >
+    
+  small
+
+  </p>
+   
+  <p
+    class="text basics-font-size-space-middle basics-font-color-black basics-align-center"
+  >
+    
+  middle
+
+  </p>
+   
+  <p
+    class="text basics-font-size-space-large basics-font-color-black basics-align-center"
+  >
+    
+  large
+
+  </p>
+</div>
+`;
+
+exports[`Storyshots atoms.Text level 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <h2
+    class="text basics-font-size-space-h2 basics-font-color-black basics-align-center"
+  >
+    
+  h2
+
+  </h2>
+   
+  <h3
+    class="text basics-font-size-space-h3 basics-font-color-black basics-align-center"
+  >
+    
+  h3
+
+  </h3>
+   
+  <h4
+    class="text basics-font-size-space-h4 basics-font-color-black basics-align-center"
+  >
+    
+  h4
+
+  </h4>
+   
+  <h5
+    class="text basics-font-size-space-h5 basics-font-color-black basics-align-center"
+  >
+    
+  h5
+
+  </h5>
+   
+  <p
+    class="text basics-font-size-space-middle basics-font-color-black basics-align-center"
+  >
+    
+  p
+
+  </p>
+   
+  <label
+    class="text basics-font-size-space-middle basics-font-color-black basics-align-center"
+  >
+    
+  label
+
+  </label>
+</div>
+`;
+
+exports[`Storyshots atoms.TextInput colors 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <div
+    style="margin: 16px 0px;"
+  >
+    <input
+      class="input is-primary is-normal"
+      placeholder="is-primary"
+      style="padding-left: 16px;"
+    />
+  </div>
+   
+  <div
+    style="margin: 16px 0px;"
+  >
+    <input
+      class="input is-info is-normal"
+      placeholder="is-info"
+      style="padding-left: 16px;"
+    />
+  </div>
+   
+  <div
+    style="margin: 16px 0px;"
+  >
+    <input
+      class="input is-danger is-normal"
+      placeholder="is-danger"
+      style="padding-left: 16px;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots atoms.TextInput size 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <div
+    style="margin: 16px 0px;"
+  >
+    <input
+      class="input is-primary is-small"
+      placeholder="is-small"
+      style="padding-left: 8px;"
+    />
+  </div>
+   
+  <div
+    style="margin: 16px 0px;"
+  >
+    <input
+      class="input is-primary is-middle"
+      placeholder="is-middle"
+      style="padding-left: 16px;"
+    />
+  </div>
+   
+  <div
+    style="margin: 16px 0px;"
+  >
+    <input
+      class="input is-primary is-large"
+      placeholder="is-large"
+      style="padding-left: 16px;"
+    />
+  </div>
+</div>
+`;
