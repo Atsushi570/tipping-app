@@ -2,8 +2,15 @@
   margin-top: 40px;
   margin-bottom: 40px;
 }
+.my-s{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .mt-s{
   margin-top: 20px;
+}
+.mb-l{
+  margin-bottom: 60px;
 }
 .header-text{
   font-size: 26px;
