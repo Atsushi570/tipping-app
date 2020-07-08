@@ -88,3 +88,21 @@ sw.*
 
 # Vim swap files
 *.swp
+storybook-static/favicon.ico
+storybook-static/iframe.html
+storybook-static/index.html
+storybook-static/main.1cbbe5d065a90a019ff3.bundle.js
+storybook-static/main.1cbbe5d065a90a019ff3.bundle.js.map
+storybook-static/main.999c48caa6b1a739e273.bundle.js
+storybook-static/main.css
+storybook-static/main.css.map
+storybook-static/runtime~main.1cbbe5d065a90a019ff3.bundle.js
+storybook-static/runtime~main.1cbbe5d065a90a019ff3.bundle.js.map
+storybook-static/runtime~main.e3851caad73f000648d3.bundle.js
+storybook-static/vendors~main.1cbbe5d065a90a019ff3.bundle.js
+storybook-static/vendors~main.1cbbe5d065a90a019ff3.bundle.js.LICENSE.txt
+storybook-static/vendors~main.1cbbe5d065a90a019ff3.bundle.js.map
+storybook-static/vendors~main.d53dfdc0bdf99be72599.bundle.js
+storybook-static/sb_dll/storybook_ui_dll.js
+storybook-static/sb_dll/storybook_ui_dll.LICENCE
+storybook-static/sb_dll/storybook_ui-manifest.json
