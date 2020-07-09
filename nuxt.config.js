@@ -1,5 +1,13 @@
 require('dotenv').config()
-const { API_KEY } = process.env
+const {
+  API_KEY,
+  AUTH_DOMAIN,
+  DATABASE_URL,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID
+} = process.env
 
 export default {
   srcDir: 'src/',
@@ -25,10 +33,6 @@ export default {
    */
   loading: { color: '#fff' },
   /*
-   ** Global CSS
-   */
-  css: ['ress', '~/assets/css/global.css'],
-  /*
    ** Plugins to load before mounting the App
    */
   plugins: [],
@@ -47,7 +51,28 @@ export default {
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/
     '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources'
+  ],
+  /*
+   ** Global CSS
+   */
+  styleResources: {
+    scss: [
+      '~/assets/scss/_variables.scss',
+      '~/assets/scss/_inheritances.scss',
+      '~/assets/scss/_mixin.scss'
+    ]
+  },
+  css: [
+    'ress',
+    '~/assets/css/global.css',
+    { src: '~/assets/scss/basics/align.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/color.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/font-size.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/rounded.scss', lang: 'sass' },
+    { src: '~/assets/scss/basics/size.scss', lang: 'sass' },
+    { src: '~/assets/scss/common.scss', lang: 'sass' }
   ],
   /*
    ** Axios module configuration
@@ -66,14 +91,42 @@ export default {
       }
     },
     /*
-     ** You can extend webpack config here
+     ** クライアントサイドでfsモジュールを使用するのを防ぐ
      */
-    extend(config, ctx) {}
+    extend(config) {
+      config.node = {
+        fs: 'empty'
+      }
+    },
+    babel: {
+      presets({ isServer }) {
+        return [
+          [
+            require.resolve('@nuxt/babel-preset-app'),
+            // require.resolve('@nuxt/babel-preset-app-edge'), // For nuxt-edge users
+            {
+              buildTarget: isServer ? 'server' : 'client',
+              corejs: { version: 3 }
+            }
+          ]
+        ]
+      }
+    }
   },
   env: {
-    API_KEY
+    API_KEY,
+    AUTH_DOMAIN,
+    DATABASE_URL,
+    PROJECT_ID,
+    STORAGE_BUCKET,
+    MESSAGING_SENDER_ID,
+    APP_ID
   },
   router: {
     middleware: ['beforeEnter/stateControl']
   }
+}
+
+module.exports = {
+  modules: ['@nuxtjs/style-resources']
 }

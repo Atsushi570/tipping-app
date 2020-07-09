@@ -1,0 +1,21 @@
+/* === color lists === */
+
+/* brand color */
+$yellow: rgb(241, 173, 0);
+$pink: lighten(rgb(225, 72, 113), 10%);
+$grad: linear-gradient(60deg, $yellow, $pink);
+
+/* basic color */
+$black: rgb(24, 27, 57);
+$dark-yellow: rgb(216, 165, 0);
+$gray: rgb(174, 176, 180);
+$green: rgb(63, 149, 80);
+$red: rgb(183, 39, 45);
+$white: rgb(255, 255, 255);
+
+/* === padding === */
+$padding: 16px 32px;
+
+/* === transition lists === */
+$trs05: 0.5s ease-out;
+$trs08: 0.8s ease-out;

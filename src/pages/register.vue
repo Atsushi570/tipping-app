@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import formInput from '~/components/formInput.vue'
 
 export default {
@@ -69,18 +70,23 @@ export default {
     }
   },
   computed: {
+    // ログイン中のユーザのuid
+    ...mapGetters('auth', ['uid']),
+
     // 全ての入力値が正しい場合にtrueを返す
     isEnableRegister() {
       return (
         !this.validateUserName && !this.validateEmail && !this.validatePassword
       )
     },
+
     // 新規登録するユーザ名が条件を満たしていないエラー文字列を返す
     validateUserName() {
       return this.formUserName.input.length > 3
         ? ''
         : '4文字以上入力してください'
     },
+
     // 新規登録するEmailアドレスが条件を満たした場合にtrueを返す
     validateEmail() {
       const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -88,6 +94,7 @@ export default {
         ? ''
         : '有効なEmailアドレスを入力してください'
     },
+
     // 新規登録するユーザ名が条件を満たした場合にtrueを返す
     validatePassword() {
       return this.formPassword.input.length > 5
@@ -96,17 +103,26 @@ export default {
     }
   },
   methods: {
+    ...mapActions('firestore', ['initUserDocument']),
+
     // アカウント情報をpostして登録をする
     // 登録が成功したらdashboardページに遷移する
     // 登録が失敗したらisRegisterFailedをtrueにする
     async register() {
-      const result = await this.$store.dispatch('auth/register', {
+      const registerResult = await this.$store.dispatch('auth/register', {
         userName: this.formUserName.input,
         email: this.formEmail.input,
         password: this.formPassword.input
       })
-      this.isRegisterFailed = !result
-      if (result) this.$router.push('dashboard')
+
+      this.isRegisterFailed = !registerResult
+      if (registerResult) {
+        await this.$store.dispatch('firestore/initUserDocument', {
+          displayName: this.formUserName.input,
+          uid: this.uid
+        })
+        this.$router.push('dashboard')
+      }
     }
   }
 }

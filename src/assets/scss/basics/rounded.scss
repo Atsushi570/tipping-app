@@ -1,0 +1,24 @@
+/* boder-radius */
+$circle-lists: (
+  'circle': 800px,
+  'circle-left': 800px 0 0 800px,
+  'circle-right': 0 800px 800px 0
+);
+
+@each $name, $circle in $circle-lists {
+  .basics-rounded-#{$name} {
+    border-radius: $circle;
+  }
+}
+
+$rounded-lists: (
+  'small': 2,
+  'middle': 3,
+  'large': 4
+);
+
+@each $name, $rounded in $rounded-lists {
+  .basics-rounded-#{$name} {
+    border-radius: 8px * ($rounded * 2);
+  }
+}

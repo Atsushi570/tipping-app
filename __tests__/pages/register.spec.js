@@ -3,6 +3,12 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import flushPromises from 'flush-promises'
 import Component from '~/pages/register.vue'
 
+// firebase.firestore()のMockを作成する
+// firestore()の振る舞いはテスト毎に定義する
+jest.mock('~/store/firestore', () => ({
+  actions: jest.fn()
+}))
+
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
@@ -19,9 +25,20 @@ beforeEach(() => {
   wrapperSuccess = shallowMount(Component, {
     stubs: ['nuxt-link'],
     store: new Vuex.Store({
+      modules: {
+        auth: {
+          namespaced: true,
+          getters: {
+            uid: () => 'string'
+          }
+        }
+      },
       actions: {
         'auth/register': () => {
           return Promise.resolve(true)
+        },
+        'firestore/initUserDocument': () => {
+          return ''
         }
       },
       mutations: {},

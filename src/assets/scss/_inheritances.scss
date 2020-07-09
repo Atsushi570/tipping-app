@@ -1,0 +1,30 @@
+/* display block & centering */
+%block {
+  display: block;
+  margin: 0 auto;
+}
+
+/* flex style */
+%flex {
+  display: flex;
+
+  &__between {
+    @extend %flex;
+
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__verti {
+    @extend %flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* delete outline in active */
+%no-outline {
+  border: none;
+  outline: none;
+}

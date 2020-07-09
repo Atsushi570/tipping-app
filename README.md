@@ -20,4 +20,13 @@ NUXTによるSPAの実装方法を学習するため作成したサンプルア�
 
 - 自動ログイン
   - localstrageにidTokenがあればそれをもとに自動でログインする
-  - localstrageのidTokenが期限切れの場合はlocalstrageに保存されたrefreshTokenを使ってtokenをリフレッシュするs
+  - localstrageのidTokenが期限切れの場合はlocalstrageに保存されたrefreshTokenを使ってtokenをリフレッシュする
+
+
+- ダッシュボード
+  - ログイン後はダッシュボードへ遷移
+  - ログインしているユーザ名が表示される
+  - 自身のウォレット（残高）が表示される
+  - ユーザ一覧を表示する
+    - ダッシュボードに、自分以外の登録ユーザが一覧表示される
+    - ユーザを選択し、そのユーザーのウォレットを確認可能

@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.clickable {
+  @extend %no-outline;
+
+  padding: $padding;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 8px 16px $gray;
+  transition: $trs05;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    opacity: 1;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:active,
+  &:focus,
+  &[disabled],
+  &[noShadow] {
+    box-shadow: none;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+}
+
+.fieldset {
+  @extend %no-outline;
+}
+
+.hidden,
+[v-cloak] {
+  display: none;
+}
+
+.linkable {
+  &[link]:not([disabled]) {
+    cursor: pointer;
+    border-bottom: 1.6px solid;
+    transition: $trs05;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
