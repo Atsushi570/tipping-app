@@ -1,8 +1,8 @@
 <template>
-  <div v-if="users[uid]" class="container">
+  <div v-if="users[uid]">
     <div class="columns">
       <div
-        class="column is-12-mobile is-10-tablet is-8-desktop is-offset-2-desktop  is-offset-1-tablet"
+        class="column is-12-mobile is-10-tablet is-8-desktop is-offset-2-desktop is-offset-1-tablet"
       >
         <div class="welcomeMessage">
           <TextAtom
