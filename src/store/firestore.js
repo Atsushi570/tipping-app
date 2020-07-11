@@ -48,7 +48,7 @@ export const actions = {
 
   // ドキュメントの監視をやめる
   unsubscribe({ state }) {
-    state.unsubscribe()
+    if (typeof state.unsubscribe === 'function') state.unsubscribe()
   },
 
   // 引数で指定したuidをキーにしてドキュメントを新規作成する

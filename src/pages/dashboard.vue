@@ -129,6 +129,7 @@ export default {
     logout() {
       this.clearAuthData()
       this.clearUsersData()
+      this.$router.push('/')
     }
   }
 }
