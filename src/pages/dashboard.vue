@@ -21,7 +21,7 @@
             level="p"
             :disable="disableTippingButton"
             :is-outlined="true"
-            @click="clickLogout"
+            @click="logout"
           ></Button>
         </div>
         <UserTable
@@ -109,7 +109,8 @@ export default {
     this.unsubscribe()
   },
   methods: {
-    ...mapActions('firestore', ['unsubscribe']),
+    ...mapActions('auth', ['clearAuthData']),
+    ...mapActions('firestore', ['unsubscribe', 'clearUsersData']),
     // 子コンポーネントから操作対象のユーザのuidと表示するModalのtypeを受け取る
     displayModal({ uid, type }) {
       this.modal.type = type
@@ -121,6 +122,13 @@ export default {
     },
     updateTippingValue(value) {
       this.tippingValue = value
+    },
+
+    // logout時に必要な処理を行う
+    // 各storeとlocalstrageを初期化してlogin pageに遷移させる
+    logout() {
+      this.clearAuthData()
+      this.clearUsersData()
     }
   }
 }

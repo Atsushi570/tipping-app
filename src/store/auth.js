@@ -1,11 +1,17 @@
 import * as axiosFirebaseAuth from '~/plugins/axiosFirebaseAuth.js'
 
-export const state = () => ({
-  idToken: null,
-  refreshToken: null,
-  displayName: null,
-  uid: null
-})
+// stateの初期値を定義する
+function getDefaultState() {
+  return {
+    idToken: null,
+    refreshToken: null,
+    displayName: null,
+    uid: null
+  }
+}
+
+// stateを初期化する
+export const state = getDefaultState()
 
 export const getters = {
   uid(state) {
@@ -30,6 +36,10 @@ export const mutations = {
   updateUid(state, uid) {
     state.uid = uid
     localStorage.setItem('uid', uid)
+  },
+  clearAuthData(state) {
+    Object.assign(state, getDefaultState())
+    localStorage.clear()
   }
 }
 
@@ -144,5 +154,10 @@ export const actions = {
     } catch (error) {
       console.log(error)
     }
+  },
+
+  // stateを初期値にrestoreしてlocalstrageをclearするmutationを呼び出す
+  clearAuthData({ commit }) {
+    commit('clearAuthData')
   }
 }

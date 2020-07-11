@@ -1,9 +1,14 @@
 import firebase from '~/plugins/firebase'
 
-export const state = () => ({
-  unsubscribe: null,
-  users: {}
-})
+// stateの初期値を定義する
+function getDefaultState() {
+  return {
+    unsubscribe: null,
+    users: {}
+  }
+}
+// stateを初期化する
+export const state = getDefaultState()
 
 export const getters = {
   users(state) {
@@ -19,6 +24,10 @@ export const mutations = {
   // ドキュメントの新規読み出し、および、更新を検知した際にstoreにcommitする
   updateUsers(state, { id, userInfo }) {
     state.users = { ...state.users, [id]: userInfo }
+  },
+  // stateを初期化する
+  clearUsersData(state) {
+    Object.assign(state, getDefaultState())
   }
 }
 
@@ -55,5 +64,10 @@ export const actions = {
         wallet: 2000
       })
     return true
+  },
+
+  // stateを初期値にrestoreするmutationを呼び出す
+  clearUsersData({ commit }) {
+    commit('clearUsersData')
   }
 }
