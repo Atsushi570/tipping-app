@@ -15,6 +15,14 @@
             font-size="middle"
             level="p"
           />
+          <Button
+            colors="is-info"
+            btn-text="ログアウト"
+            level="p"
+            :disable="disableTippingButton"
+            :is-outlined="true"
+            @click="clickLogout"
+          ></Button>
         </div>
         <UserTable
           :users="users"
@@ -49,6 +57,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Button from '~/components/atoms/Button'
 import Text from '~/components/atoms/Text'
 import TextInput from '~/components/atoms/TextInput'
 import UserTable from '~/components/organisms/UserTable'
@@ -59,6 +68,7 @@ export default {
     await store.dispatch('firestore/watchDoc')
   },
   components: {
+    Button,
     TextAtom: Text,
     TextInput,
     UserTable,
