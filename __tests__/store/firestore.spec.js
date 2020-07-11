@@ -102,5 +102,43 @@ describe('store/firestore.jsのテスト', () => {
         })
       })
     })
+
+    describe('clearAuthDataのテスト', () => {
+      test('storeを初期化できること', async () => {
+        // firestoreにsetする情報を保持する変数
+        const expectedSet = {}
+
+        // テスト対象の処理に合わせてfirestore()の振る舞いを定義する
+        firebase.firestore.mockImplementation(() => {
+          return {
+            collection: jest.fn(() => ({
+              doc: jest.fn(() => ({
+                set: jest.fn(({ displayName, wallet }) => {
+                  expectedSet.displayName = displayName
+                  expectedSet.wallet = wallet
+                })
+              }))
+            }))
+          }
+        })
+
+        // 定義した引数を渡してinitUserDocumentを呼び出す
+        action = 'initUserDocument'
+        const payload = { uid: 'uid', displayName: 'test user' }
+        await testedAction(store, payload)
+
+        // firestoreに各種データをsetできること
+        expect(expectedSet).toStrictEqual({
+          displayName: payload.displayName,
+          wallet: 2000
+        })
+
+        action = 'clearUsersData'
+        testedAction(store, payload)
+
+        expect(store.state.unsubscribe).toBe(null)
+        expect(store.state.users).toEqual({})
+      })
+    })
   })
 })

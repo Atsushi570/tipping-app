@@ -195,5 +195,43 @@ describe('store/auth.jsのテスト', () => {
         expect(refreshTokenSpy).toHaveBeenCalledTimes(1)
       })
     })
+
+    describe('clearAuthDataのテスト', () => {
+      test('storeとlocalstrageが初期化できること', async () => {
+        // 使用するaxiosインスタンスのmockを定義
+        createMock(axiosFirebaseAuth.signIn)
+
+        // loginを呼び出す
+        action = 'login'
+        await testedAction(store, payload)
+
+        // actions 内のsetTimeoutを実行する
+        jest.runAllTimers()
+
+        // storeとlocalstrageに各種データが保存されること
+        expect(store.state.idToken).toBe(testIdToken)
+        expect(store.state.refreshToken).toBe(testRefreshToken)
+        expect(store.state.displayName).toBe(testDisplayName)
+        expect(localStorage.idToken).toBe(testIdToken)
+        expect(localStorage.uid).toBe(testUid)
+        expect(localStorage.expirationDateTime).not.toBe(undefined)
+        expect(localStorage.refreshToken).toBe(testRefreshToken)
+        expect(localStorage.displayName).toBe(payload.userName)
+        expect(localStorage.uid).toBe(testUid)
+
+        action = 'clearAuthData'
+        testedAction(store, payload)
+
+        expect(store.state.idToken).toBe(null)
+        expect(store.state.refreshToken).toBe(null)
+        expect(store.state.displayName).toBe(null)
+        expect(localStorage.idToken).toBe(undefined)
+        expect(localStorage.uid).toBe(undefined)
+        expect(localStorage.expirationDateTime).toBe(undefined)
+        expect(localStorage.refreshToken).toBe(undefined)
+        expect(localStorage.displayName).toBe(undefined)
+        expect(localStorage.uid).toBe(undefined)
+      })
+    })
   })
 })
