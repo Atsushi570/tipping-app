@@ -21,6 +21,23 @@ storiesOf('atoms.Button', module)
     }
   )
   .add(
+    'outline',
+    () => ({
+      components: { Button },
+      template: `
+      <div style="display: flex; flex-direction:column; align-items:center;">
+        <Button colors="is-primary" @click="action" btn-text="is-primary" :is-outlined="true" style="margin: 16px 0;"></Button>
+        <Button colors="is-info" @click="action" btn-text="is-info" :is-outlined="true" style="margin: 16px 0;"></Button>
+        <Button colors="is-danger" @click="action" btn-text="is-danger" :is-outlined="true" style="margin: 16px 0;"></Button>
+      </div>
+    `,
+      methods: { action: action('クリックされました') }
+    }),
+    {
+      notes: 'some documentation here'
+    }
+  )
+  .add(
     'size',
     () => ({
       components: { Button },

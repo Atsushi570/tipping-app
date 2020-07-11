@@ -1,7 +1,7 @@
 <template>
   <div :class="'basics-align-' + (align || 'center')">
     <button
-      :class="['button', colors || 'is-primary', size || 'is-normal']"
+      :class="['button', colors || 'is-primary', size || 'is-normal', outlined]"
       :Disabled="disable"
       @click="clickHandler"
     >
@@ -21,7 +21,8 @@ export default {
     btnText: String,
     colors: String,
     size: String,
-    disable: Boolean
+    disable: Boolean,
+    isOutlined: Boolean
   },
   computed: {
     spaceArround() {
@@ -30,6 +31,9 @@ export default {
         /* sizeがsmallだと8pxのpadding */
         `padding-left:${space}; padding-right:${space}`
       )
+    },
+    outlined() {
+      return this.isOutlined ? 'is-outlined' : ''
     }
   },
   methods: {
