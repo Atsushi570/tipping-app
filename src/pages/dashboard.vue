@@ -64,8 +64,8 @@ import UserTable from '~/components/organisms/UserTable'
 import Modal from '~/components/molecules/Modal'
 
 export default {
-  async fetch({ store }) {
-    await store.dispatch('firestore/watchDoc')
+  async fetch() {
+    await this.watchDoc()
   },
   components: {
     Button,
@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['clearAuthData']),
-    ...mapActions('firestore', ['unsubscribe', 'clearUsersData']),
+    ...mapActions('firestore', ['watchDoc', 'unsubscribe', 'clearUsersData']),
     // 子コンポーネントから操作対象のユーザのuidと表示するModalのtypeを受け取る
     displayModal({ uid, type }) {
       this.modal.type = type
