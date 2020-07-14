@@ -155,6 +155,63 @@ exports[`Storyshots atoms.Button disable 1`] = `
 </div>
 `;
 
+exports[`Storyshots atoms.Button outline 1`] = `
+<div
+  style="display: flex; flex-direction: column; align-items: center;"
+>
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-primary is-normal is-outlined"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-primary
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-info is-normal is-outlined"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-info
+      
+      </span>
+    </button>
+  </div>
+   
+  <div
+    class="basics-align-center"
+    style="margin: 16px 0px;"
+  >
+    <button
+      class="button is-danger is-normal is-outlined"
+    >
+      <span
+        style="padding-left: 16px; padding-right: 16px;"
+      >
+        
+        is-danger
+      
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
 exports[`Storyshots atoms.Button size 1`] = `
 <div
   style="display: flex; flex-direction: column; align-items: center;"
